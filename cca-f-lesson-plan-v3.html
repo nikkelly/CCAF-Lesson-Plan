@@ -1,0 +1,1769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CCA-F Complete Study Plan v3</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+
+  :root {
+    --bg: #0b0d0c;
+    --surface: #131615;
+    --surface2: #1a1d1b;
+    --surface3: #222624;
+    --border: #272b29;
+    --border2: #323836;
+    --accent: #c8f07a;
+    --accent2: #7af0c8;
+    --accent3: #f0c87a;
+    --accent4: #c87af0;
+    --accent5: #f07ab0;
+    --text: #e4ebe5;
+    --muted: #63706a;
+    --muted2: #8a9690;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 48px 52px 40px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(200,240,122,0.055) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 38px;
+    font-weight: 400;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 10px;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .subtitle { color: var(--muted2); font-weight: 300; font-size: 14px; max-width: 600px; line-height: 1.6; }
+
+  .meta-strip {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 28px;
+  }
+  .chip {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 5px;
+    padding: 5px 12px;
+    color: var(--muted2);
+    display: flex; align-items: center; gap: 7px;
+  }
+  .chip b { color: var(--text); font-weight: 500; }
+
+  /* ── LAYOUT ── */
+  .layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    min-height: 100vh;
+    align-items: start;
+  }
+
+  /* ── SIDEBAR ── */
+  nav {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid var(--border);
+    padding: 28px 0;
+    background: var(--surface);
+  }
+  .nav-section {
+    padding: 0 20px;
+    margin-bottom: 6px;
+  }
+  .nav-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 10px 0 6px;
+    display: block;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 7px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: var(--muted2);
+    font-size: 12.5px;
+    font-weight: 400;
+    transition: background 0.12s, color 0.12s;
+    margin-bottom: 1px;
+  }
+  .nav-item:hover { background: var(--surface2); color: var(--text); }
+  .nav-item.active { background: var(--surface2); color: var(--text); }
+  .nav-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%; flex-shrink: 0;
+  }
+  .nav-pct {
+    margin-left: auto;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+  }
+
+  /* ── MAIN ── */
+  main { padding: 40px 52px 80px; overflow-x: hidden; }
+
+  /* ── DOMAIN MAP ── */
+  .domain-bar {
+    display: flex;
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 28px;
+    gap: 2px;
+  }
+  .db-seg { border-radius: 2px; }
+
+  /* ── PHASE SECTION ── */
+  .phase-section {
+    margin-bottom: 56px;
+    scroll-margin-top: 24px;
+  }
+
+  .phase-head {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 6px;
+  }
+  .phase-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .phase-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--text);
+  }
+  .phase-rule { flex: 1; height: 1px; background: var(--border); }
+  .phase-time {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    flex-shrink: 0;
+  }
+  .phase-desc {
+    font-size: 13px;
+    color: var(--muted2);
+    margin-bottom: 20px;
+    max-width: 760px;
+    line-height: 1.65;
+  }
+  .phase-desc strong { color: var(--text); font-weight: 500; }
+
+  /* ── COURSE CARD ── */
+  .course-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .course-card:hover { border-color: var(--border2); }
+
+  .course-top {
+    display: grid;
+    grid-template-columns: 22px 1fr auto;
+    gap: 14px;
+    align-items: start;
+    padding: 18px 20px 14px;
+    cursor: pointer;
+  }
+
+  .cc-check {
+    width: 18px; height: 18px;
+    border: 1.5px solid var(--border2);
+    border-radius: 4px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .cc-name {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 4px;
+  }
+  .cc-tagline { font-size: 12.5px; color: var(--muted2); line-height: 1.55; }
+
+  .cc-right {
+    display: flex; flex-direction: column; align-items: flex-end; gap: 6px; flex-shrink: 0;
+  }
+  .cc-time { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); }
+
+  /* tags */
+  .tag {
+    font-size: 10px; font-family: 'DM Mono', monospace;
+    padding: 2px 8px; border-radius: 3px;
+    letter-spacing: 0.05em; text-transform: uppercase; white-space: nowrap;
+  }
+  .tag-core  { background: rgba(200,240,122,.1);  color: var(--accent);  border: 1px solid rgba(200,240,122,.18); }
+  .tag-exam  { background: rgba(240,200,122,.1);  color: var(--accent3); border: 1px solid rgba(240,200,122,.18); }
+  .tag-supp  { background: rgba(122,240,200,.1);  color: var(--accent2); border: 1px solid rgba(122,240,200,.18); }
+  .tag-skip  { background: rgba(140,140,140,.08); color: var(--muted2);  border: 1px solid rgba(140,140,140,.15); }
+
+  /* domain dots */
+  .dd { display:inline-block; width:7px; height:7px; border-radius:50%; flex-shrink:0; margin-top:2px; }
+  .d1 { background: var(--accent); }
+  .d2 { background: var(--accent2); }
+  .d3 { background: var(--accent3); }
+  .d4 { background: var(--accent4); }
+  .d5 { background: var(--accent5); }
+  .dm { background: conic-gradient(var(--accent) 0 25%, var(--accent2) 25% 50%, var(--accent3) 50% 75%, var(--accent4) 75% 100%); }
+
+  /* expandable body */
+  .course-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 20px 56px 22px;
+    background: var(--surface2);
+  }
+  .course-card.open .course-body { display: block; }
+  .course-card.open .course-top { padding-bottom: 16px; }
+
+  .body-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px 32px;
+    margin-bottom: 18px;
+  }
+
+  .body-section h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .topic-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .topic-list li {
+    font-size: 12.5px;
+    color: var(--muted2);
+    display: flex; gap: 8px; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .topic-list li::before { content: '→'; color: var(--muted); flex-shrink: 0; margin-top: 1px; }
+  .topic-list li strong { color: var(--text); font-weight: 500; }
+
+  .warn-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .warn-list li {
+    font-size: 12.5px;
+    color: var(--muted2);
+    display: flex; gap: 8px; align-items: flex-start;
+    line-height: 1.5;
+  }
+  .warn-list li::before { content: '✕'; color: #f07a7a; flex-shrink: 0; font-size: 10px; margin-top: 2px; }
+
+  .link-cluster {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px;
+  }
+  .action-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: 1px solid var(--border2);
+    background: var(--surface3);
+    color: var(--muted2);
+    transition: border-color 0.13s, color 0.13s;
+  }
+  .action-link:hover { border-color: var(--accent); color: var(--accent); }
+  .action-link .al-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+  .action-link.gh .al-dot { background: var(--accent2); }
+  .action-link.gh:hover { border-color: var(--accent2); color: var(--accent2); }
+  .action-link.ext .al-dot { background: var(--accent3); }
+  .action-link.ext:hover { border-color: var(--accent3); color: var(--accent3); }
+  .action-link.docs .al-dot { background: var(--accent4); }
+  .action-link.docs:hover { border-color: var(--accent4); color: var(--accent4); }
+
+  .exam-signal {
+    background: rgba(200,240,122,.06);
+    border: 1px solid rgba(200,240,122,.14);
+    border-radius: 7px;
+    padding: 12px 16px;
+    font-size: 12.5px;
+    color: var(--muted2);
+    display: flex; gap: 10px; align-items: flex-start;
+    line-height: 1.55;
+    margin-top: 4px;
+  }
+  .exam-signal .es-icon { color: var(--accent); font-size: 13px; flex-shrink: 0; margin-top: 1px; }
+  .exam-signal strong { color: var(--accent); font-weight: 500; }
+
+  /* ── PRACTICE SECTION ── */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 56px;
+  }
+  .pcard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 22px;
+  }
+  .pcard-head {
+    display: flex; gap: 10px; align-items: center; margin-bottom: 14px;
+  }
+  .pcard-icon {
+    font-size: 15px; line-height: 1; flex-shrink: 0;
+  }
+  .pcard-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted2);
+  }
+  .pcard p, .pcard li {
+    font-size: 12.5px;
+    color: var(--muted2);
+    line-height: 1.6;
+  }
+  .pcard ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+  .pcard li { display: flex; gap: 8px; align-items: flex-start; }
+  .pcard li::before { content: '→'; color: var(--muted); flex-shrink: 0; margin-top: 1px; }
+  .pcard li strong { color: var(--text); font-weight: 500; }
+
+  /* ── EXAM SCENARIOS ── */
+  .scenario-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 56px;
+  }
+  .scard {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 16px 18px;
+  }
+  .scard-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .scard-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .scard-desc {
+    font-size: 12px;
+    color: var(--muted2);
+    line-height: 1.5;
+  }
+  .scard-domains {
+    display: flex; gap: 5px; flex-wrap: wrap; margin-top: 10px;
+  }
+  .scard-d {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    padding: 1px 7px;
+    border-radius: 3px;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    color: var(--muted2);
+  }
+
+  /* ── FOOTER LINKS ── */
+  .footer-links {
+    border-top: 1px solid var(--border);
+    padding-top: 28px;
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+
+  /* ── PRACTICE MODE OVERLAY ── */
+  #practiceOverlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(7,9,8,.85);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  #practiceOverlay.show { display: flex; }
+
+  #practicePanel {
+    background: var(--surface);
+    border: 1px solid var(--border2);
+    border-radius: 14px;
+    width: 100%;
+    max-width: 740px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 40px 80px rgba(0,0,0,.6);
+    animation: slideUp .22s ease;
+  }
+  @keyframes slideUp {
+    from { opacity:0; transform: translateY(18px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+
+  .pm-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 22px 26px 18px;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0;
+    background: var(--surface);
+    z-index: 2;
+    border-radius: 14px 14px 0 0;
+  }
+  .pm-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--text);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pm-score-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted2);
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    padding: 4px 10px;
+    border-radius: 5px;
+  }
+  .pm-score-badge b { color: var(--accent); }
+  .pm-close {
+    background: none; border: 1px solid var(--border2);
+    color: var(--muted2); width: 30px; height: 30px;
+    border-radius: 6px; cursor: pointer; font-size: 14px;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color .13s, color .13s;
+  }
+  .pm-close:hover { border-color: var(--accent5); color: var(--accent5); }
+
+  .pm-progress-bar {
+    height: 3px;
+    background: var(--border);
+    margin: 0 26px;
+  }
+  .pm-progress-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 2px;
+    transition: width .3s ease;
+  }
+
+  .pm-body { padding: 28px 26px 24px; }
+
+  .pm-domain-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+  .pm-q-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .pm-question {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+  .pm-scenario {
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-left: 3px solid var(--accent3);
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 12.5px;
+    color: var(--muted2);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+
+  .pm-options { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+
+  .pm-option {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface2);
+    border: 1.5px solid var(--border2);
+    border-radius: 9px;
+    padding: 13px 16px;
+    cursor: pointer;
+    transition: border-color .13s, background .13s;
+    text-align: left;
+    width: 100%;
+  }
+  .pm-option:hover:not(:disabled) { border-color: var(--muted2); background: var(--surface3); }
+  .pm-option:disabled { cursor: default; }
+  .pm-option.selected-correct { border-color: var(--accent); background: rgba(200,240,122,.07); }
+  .pm-option.selected-wrong   { border-color: var(--accent5); background: rgba(240,122,176,.07); }
+  .pm-option.reveal-correct   { border-color: var(--accent); background: rgba(200,240,122,.05); }
+
+  .pm-opt-letter {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    width: 20px; height: 20px;
+    border-radius: 4px;
+    background: var(--border2);
+    color: var(--muted2);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+    transition: background .13s, color .13s;
+  }
+  .selected-correct .pm-opt-letter { background: var(--accent); color: var(--bg); }
+  .selected-wrong   .pm-opt-letter { background: var(--accent5); color: var(--bg); }
+  .reveal-correct   .pm-opt-letter { background: rgba(200,240,122,.3); color: var(--accent); }
+
+  .pm-opt-text { font-size: 13px; color: var(--muted2); line-height: 1.55; }
+  .pm-option:hover:not(:disabled) .pm-opt-text { color: var(--text); }
+  .selected-correct .pm-opt-text,
+  .reveal-correct   .pm-opt-text { color: var(--text); }
+  .selected-wrong   .pm-opt-text { color: var(--text); }
+
+  .pm-rationale {
+    display: none;
+    background: var(--surface2);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+    animation: fadeIn .18s ease;
+  }
+  @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+  .pm-rationale.show { display: block; }
+  .pm-rat-head {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin-bottom: 8px;
+  }
+  .pm-rat-correct { color: var(--accent); }
+  .pm-rat-wrong   { color: var(--accent5); }
+  .pm-rat-body { font-size: 12.5px; color: var(--muted2); line-height: 1.6; }
+  .pm-rat-body strong { color: var(--text); font-weight: 500; }
+
+  .pm-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .pm-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    letter-spacing: .06em;
+    padding: 9px 20px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all .13s;
+    border: 1.5px solid;
+  }
+  .pm-btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+    font-weight: 600;
+  }
+  .pm-btn-primary:hover { opacity: .88; }
+  .pm-btn-primary:disabled { opacity: .35; cursor: default; }
+  .pm-btn-ghost {
+    background: transparent;
+    border-color: var(--border2);
+    color: var(--muted2);
+  }
+  .pm-btn-ghost:hover { border-color: var(--muted2); color: var(--text); }
+
+  .pm-results {
+    text-align: center;
+    padding: 20px 0 10px;
+  }
+  .pm-result-score {
+    font-family: 'DM Serif Display', serif;
+    font-size: 56px;
+    font-weight: 400;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .pm-result-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted2);
+    margin-bottom: 20px;
+  }
+  .pm-result-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-align: left;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+  }
+  .pm-rb-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12.5px;
+    color: var(--muted2);
+  }
+  .pm-rb-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .pm-rb-label { flex: 1; }
+  .pm-rb-score { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--text); }
+  .pm-rb-bar { flex: 2; height: 4px; background: var(--border); border-radius: 2px; overflow: hidden; }
+  .pm-rb-fill { height: 100%; border-radius: 2px; transition: width .5s ease; }
+
+  /* filter row */
+  .pm-filter-row {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px;
+  }
+  .pm-filter-btn {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 4px;
+    border: 1px solid var(--border2);
+    background: var(--surface2);
+    color: var(--muted2);
+    cursor: pointer;
+    transition: all .12s;
+  }
+  .pm-filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(200,240,122,.08); }
+  .pm-filter-btn:hover:not(.active) { border-color: var(--muted2); color: var(--text); }
+
+  @media (max-width: 900px) {
+    .layout { grid-template-columns: 1fr; }
+    nav { display: none; }
+    header, main { padding: 28px 22px; }
+    .body-grid { grid-template-columns: 1fr; }
+    .practice-grid { grid-template-columns: 1fr; }
+    .scenario-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 26px; }
+    [style*="grid-template-columns:1fr 1fr 1fr"] { grid-template-columns: 1fr !important; }
+    [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">CCA-F · Anthropic Academy · Comprehensive Study Plan</div>
+  <h1>From <em>First Course</em><br>to Certified Architect</h1>
+  <div class="subtitle">Every phase broken down — what to do, what topics to focus on, which resources to hit, and what exam traps to avoid. Calibrated for your existing Claude Code + MCP experience.</div>
+  <div class="meta-strip">
+    <div class="chip">Exam <b>60 Qs · 120 min</b></div>
+    <div class="chip">Pass <b>720 / 1000</b></div>
+    <div class="chip">Fee <b>$99</b></div>
+    <div class="chip">Total study <b>~18–22 hrs</b></div>
+    <div class="chip">Valid <b>2 years</b></div>
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- ── SIDEBAR ── -->
+<nav>
+  <div class="nav-section">
+    <span class="nav-label">Phases</span>
+    <a class="nav-item" href="#p1">
+      <span class="nav-dot" style="background:var(--muted2)"></span> Foundation
+      <span class="nav-pct">~1.5h</span>
+    </a>
+    <a class="nav-item" href="#p2">
+      <span class="nav-dot d3"></span> API Mastery
+      <span class="nav-pct">~8h</span>
+    </a>
+    <a class="nav-item" href="#p3">
+      <span class="nav-dot d4"></span> MCP
+      <span class="nav-pct">~3.5h</span>
+    </a>
+    <a class="nav-item" href="#p4">
+      <span class="nav-dot d1"></span> Agentic
+      <span class="nav-pct">~2h</span>
+    </a>
+    <a class="nav-item" href="#p5">
+      <span class="nav-dot d2"></span> Claude Code
+      <span class="nav-pct">~1.5h</span>
+    </a>
+    <a class="nav-item" href="#p6">
+      <span class="nav-dot" style="background:var(--muted)"></span> Optional
+      <span class="nav-pct">~2h</span>
+    </a>
+    <a class="nav-item" href="#p7">
+      <span class="nav-dot" style="background:var(--accent3)"></span> Exam Prep
+    </a>
+    <a class="nav-item" href="#cheatsheet">
+      <span class="nav-dot" style="background:var(--accent4)"></span> Cheatsheet
+    </a>
+    <a class="nav-item" href="#outofscope">
+      <span class="nav-dot" style="background:var(--muted)"></span> Out of Scope
+    </a>
+    <a class="nav-item" href="#examday">
+      <span class="nav-dot" style="background:var(--accent5)"></span> Exam Day
+    </a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-label">Exam Domains</span>
+    <a class="nav-item" href="#p4"><span class="nav-dot d1"></span> Agentic Arch<span class="nav-pct">27%</span></a>
+    <a class="nav-item" href="#p5"><span class="nav-dot d2"></span> Claude Code<span class="nav-pct">20%</span></a>
+    <a class="nav-item" href="#p2"><span class="nav-dot d3"></span> Prompt Eng<span class="nav-pct">20%</span></a>
+    <a class="nav-item" href="#p3"><span class="nav-dot d4"></span> Tool / MCP<span class="nav-pct">18%</span></a>
+    <a class="nav-item" href="#p2"><span class="nav-dot d5"></span> Context Mgmt<span class="nav-pct">15%</span></a>
+  </div>
+  <div class="nav-section">
+    <span class="nav-label">Quick Links</span>
+    <a class="nav-item" href="https://anthropic.skilljar.com/" target="_blank"><span class="nav-dot" style="background:var(--accent)"></span> Academy</a>
+    <a class="nav-item" href="https://github.com/anthropics/courses" target="_blank"><span class="nav-dot" style="background:var(--accent2)"></span> GitHub Courses</a>
+    <a class="nav-item" href="https://docs.anthropic.com" target="_blank"><span class="nav-dot" style="background:var(--accent4)"></span> Docs</a>
+    <a class="nav-item" href="https://www.claudecertifiedarchitects.com/cca-practice-questions" target="_blank"><span class="nav-dot" style="background:var(--accent3)"></span> Practice Qs</a>
+  </div>
+  <div class="nav-section" style="margin-top:16px;">
+    <button id="practiceBtn" onclick="openPractice()" style="width:100%; background:rgba(200,240,122,.08); border:1.5px solid rgba(200,240,122,.3); color:var(--accent); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:11px 14px; border-radius:8px; cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:8px; justify-content:center;">
+      <span style="font-size:13px;">▶</span> Practice Mode
+    </button>
+  </div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main>
+
+  <!-- Domain bar -->
+  <div class="domain-bar">
+    <div class="db-seg d1" style="flex:27; background:var(--accent)"></div>
+    <div class="db-seg d2" style="flex:20; background:var(--accent2)"></div>
+    <div class="db-seg d3" style="flex:20; background:var(--accent3)"></div>
+    <div class="db-seg d4" style="flex:18; background:var(--accent4)"></div>
+    <div class="db-seg d5" style="flex:15; background:var(--accent5)"></div>
+  </div>
+
+  <!-- ═══ PHASE 1 ═══ -->
+  <div class="phase-section" id="p1">
+    <div class="phase-head">
+      <span class="phase-badge">Phase 01</span>
+      <span class="phase-title">Foundation & Orientation</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">~1.5 hrs</span>
+    </div>
+    <p class="phase-desc">Two courses that anchor the whole plan. <strong>Claude 101</strong> establishes model family tradeoffs you'll need for every architecture question. <strong>AI Capabilities & Limitations</strong> feeds Domain 5's escalation and reliability scenarios. You already know Claude well — move fast here but don't skip the model comparison sections.</p>
+
+    <!-- Course: Claude 101 -->
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd dm"></span> Claude 101 <span class="tag tag-exam">exam: model selection</span></div>
+          <div class="cc-tagline">Model families, capabilities, context windows, and everyday Claude usage patterns.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~30 min</span>
+          <span class="tag tag-skip">skim fast</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Topics to focus on</h4>
+            <ul class="topic-list">
+              <li><strong>Haiku / Sonnet / Opus tradeoffs</strong> — cost, latency, intelligence; exam tests when to select each</li>
+              <li><strong>Context window sizes</strong> — how they affect multi-turn and long-document workflows</li>
+              <li><strong>Extended thinking</strong> — when it adds value vs. overkill; cost implications</li>
+              <li><strong>System prompt vs. user prompt</strong> — behavioral control patterns</li>
+              <li>Claude's safety design and refusal behaviors (feeds Domain 1 escalation design)</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Exam anti-patterns</h4>
+            <ul class="warn-list">
+              <li>Defaulting to Opus for every task — exam expects cost/performance reasoning</li>
+              <li>Treating all models as interchangeable for agentic workloads</li>
+              <li>Ignoring context window limits in multi-agent designs</li>
+            </ul>
+            <div style="margin-top:14px">
+              <div class="exam-signal">
+                <span class="es-icon">⚑</span>
+                <span><strong>Exam signal:</strong> Questions about "which model for this use case" require knowing cost, latency, and capability tradeoffs — not just "pick the best one."</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px">
+          <h4>Actions for this course</h4>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/claude-101" target="_blank"><span class="al-dot"></span> Start course → skilljar</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/about-claude/models/overview" target="_blank"><span class="al-dot"></span> Models overview docs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Course: AI Capabilities & Limitations -->
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd d5"></span> AI Capabilities & Limitations <span class="tag tag-exam">exam: Domain 5</span></div>
+          <div class="cc-tagline">How generative models actually work, failure modes, confidence calibration, and when to escalate to humans.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~1 hr</span>
+          <span class="tag tag-exam">exam weight</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Topics to focus on</h4>
+            <ul class="topic-list">
+              <li><strong>Where Claude halluccinates</strong> — retrieval gaps, specificity limits, temporal cutoffs</li>
+              <li><strong>Confidence calibration</strong> — when to trust outputs vs. require verification</li>
+              <li><strong>CALM framework</strong> — Context-Aware LLM Management; a named exam concept for Domain 5</li>
+              <li><strong>Human-in-the-loop triggers</strong> — policy gaps, low confidence, irreversible actions</li>
+              <li>Graceful degradation — how systems should behave when Claude is uncertain</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Exam anti-patterns</h4>
+            <ul class="warn-list">
+              <li>Designing agents that never escalate to humans</li>
+              <li>Using Claude output directly without confidence checks for high-stakes decisions</li>
+              <li>Treating limitations as fixed — they vary by task type and prompt design</li>
+            </ul>
+            <div style="margin-top:14px">
+              <div class="exam-signal">
+                <span class="es-icon">⚑</span>
+                <span><strong>Exam signal:</strong> Domain 5 questions often describe a production agent behaving unreliably — knowing the CALM framework makes answer patterns obvious.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px">
+          <h4>Actions for this course</h4>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/ai-capabilities-and-limitations" target="_blank"><span class="al-dot"></span> Start course → skilljar</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems" target="_blank"><span class="al-dot"></span> Agentic systems docs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 2 ═══ -->
+  <div class="phase-section" id="p2">
+    <div class="phase-head">
+      <span class="phase-badge">Phase 02</span>
+      <span class="phase-title">API Mastery — The Core Course</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">~8–10 hrs · Do not rush</span>
+    </div>
+    <p class="phase-desc">One course, 84 lectures, 10 quizzes. This is your primary textbook — it covers <strong>Domains 3 (Prompt Engineering, 20%) and 5 (Context Management, 15%)</strong> almost entirely, and underpins everything else. The GitHub notebooks are your hands-on companion; run them while watching the lectures.</p>
+
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd d3"></span><span class="dd d5"></span> Building with the Claude API <span class="tag tag-core">core</span></div>
+          <div class="cc-tagline">84 lectures across API auth, conversations, tool use, RAG, streaming, structured output, multimodal, and architectural patterns.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">8+ hrs</span>
+          <span class="tag tag-core">~35% of exam</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Must-master topics</h4>
+            <ul class="topic-list">
+              <li><strong>PRECISE framework</strong> — Persona, Role, Explicit instructions, Context, Instructions, Steps, Examples. Know what breaks when you omit each component</li>
+              <li><strong>Structured output / JSON schemas</strong> — enforcing schemas with tool_choice, validation retry loops, graceful degradation when parsing fails</li>
+              <li><strong>Tool use mechanics</strong> — stop_reason: "tool_use" vs "end_turn", appending tool results to conversation history, multi-turn tool loops</li>
+              <li><strong>System prompt architecture</strong> — ordering rules, persona before context, XML tags for structure</li>
+              <li><strong>Few-shot prompting</strong> — example selection, ordering matters (recency bias), what makes a good negative example</li>
+              <li><strong>Prompt caching</strong> — cache_control breakpoints, what's cacheable, cost impact, when not to cache</li>
+              <li><strong>Conversation compaction</strong> — summarization patterns, context window budget management</li>
+              <li><strong>RAG patterns</strong> — retrieval-augmented generation integration, when to use vs. long-context</li>
+              <li><strong>Streaming</strong> — when to stream vs. single response; latency tradeoffs for agentic systems</li>
+              <li><strong>Message Batches API</strong> — async processing of large request volumes at reduced cost; exam tests when it's appropriate (bulk independent tasks) vs. inappropriate (real-time, dependent tasks)</li>
+              <li><strong>"Lost in the middle" effect</strong> — models reliably process content at start and end of long inputs; findings in the middle get missed. Mitigation: key summaries at top, explicit section headers, trim verbose tool outputs before accumulation</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Exam anti-patterns (Domain 3)</h4>
+            <ul class="warn-list">
+              <li>No Examples section in PRECISE → tone/length variance in production</li>
+              <li>Using natural language output where JSON schema would ensure reliability</li>
+              <li>Retry loops without exponential backoff or max-attempt caps</li>
+              <li>Caching content that changes frequently (user-specific context)</li>
+              <li>Prompt injection vulnerabilities in unsanitized user inputs passed to system prompt</li>
+            </ul>
+            <div style="margin-top:12px">
+              <h4>Exam anti-patterns (Domain 5)</h4>
+              <ul class="warn-list">
+                <li>Not setting cache_control breakpoints on long, stable system prompts</li>
+                <li>Letting context windows fill without summarization or compaction</li>
+                <li>Passing entire conversation history to every subagent (context isolation failure)</li>
+              </ul>
+            </div>
+            <div style="margin-top:14px">
+              <div class="exam-signal">
+                <span class="es-icon">⚑</span>
+                <span><strong>Exam signal:</strong> "Responses vary in tone and length" → missing Examples in PRECISE. "Output unreliable across sessions" → missing structured output constraints.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px">
+          <h4>Actions — run these alongside the course</h4>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/claude-with-the-anthropic-api" target="_blank"><span class="al-dot"></span> Start course → skilljar</a>
+            <a class="action-link gh" href="https://github.com/anthropics/courses/tree/master/anthropic_api_fundamentals" target="_blank"><span class="al-dot"></span> API Fundamentals notebooks (GitHub)</a>
+            <a class="action-link gh" href="https://github.com/anthropics/courses/tree/master/prompt_engineering_interactive_tutorial" target="_blank"><span class="al-dot"></span> Prompt Engineering tutorial (GitHub)</a>
+            <a class="action-link gh" href="https://github.com/anthropics/courses/tree/master/real_world_prompting" target="_blank"><span class="al-dot"></span> Real World Prompting notebooks</a>
+            <a class="action-link gh" href="https://github.com/anthropics/courses/tree/master/prompt_evaluations" target="_blank"><span class="al-dot"></span> Prompt Evaluations notebooks</a>
+            <a class="action-link gh" href="https://github.com/anthropics/courses/tree/master/tool_use" target="_blank"><span class="al-dot"></span> Tool Use notebooks (GitHub)</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank"><span class="al-dot"></span> Prompt engineering docs</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-caching" target="_blank"><span class="al-dot"></span> Prompt caching docs</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/build-with-claude/batch-processing" target="_blank"><span class="al-dot"></span> Message Batches API docs</a>
+            <a class="action-link ext" href="https://catalog.us-east-1.prod.workshops.aws/workshops/0644c9e9-5b82-45f2-8835-3b5aa30b1848/en-US" target="_blank"><span class="al-dot"></span> AWS Workshop version</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 3 ═══ -->
+  <div class="phase-section" id="p3">
+    <div class="phase-head">
+      <span class="phase-badge">Phase 03</span>
+      <span class="phase-title">MCP — Tool Design & Integration</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">~3–4 hrs · Domain 4 (18%)</span>
+    </div>
+    <p class="phase-desc">Two courses back to back. You've wired MCP servers in Claude Code already — use this phase to <strong>formalize the primitives and learn production anti-patterns</strong>. The exam presents broken or suboptimal tool schemas and asks you to identify the flaw. Building a minimal MCP server during this phase is more valuable than extra video time.</p>
+
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd d4"></span> Introduction to Model Context Protocol <span class="tag tag-exam">exam: Domain 4</span></div>
+          <div class="cc-tagline">MCP primitives (tools, resources, prompts), building servers and clients in Python from scratch.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~1.5 hrs</span>
+          <span class="tag tag-exam">exam weight</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Topics to focus on</h4>
+            <ul class="topic-list">
+              <li><strong>Three primitives: tools, resources, prompts</strong> — know when each is appropriate; exam tests tool vs. resource boundary (read-only data = resource, not tool)</li>
+              <li><strong>JSON Schema for tool inputs</strong> — required fields, types, descriptions; spot malformed schemas</li>
+              <li><strong>Tool description quality</strong> — descriptions Claude uses to decide whether to call the tool; vague descriptions = misrouting</li>
+              <li><strong>stdio vs. SSE transport</strong> — stdio for local subprocess, SSE for remote/cloud servers streaming over HTTP</li>
+              <li><strong>MCP server vs. client roles</strong> — who exposes capabilities, who consumes them</li>
+              <li>Scoping: project-level .mcp.json vs. user-level ~/.claude.json and when to use each</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Exam anti-patterns</h4>
+            <ul class="warn-list">
+              <li>Exposing content catalogs as tools instead of resources — wastes tokens on exploration</li>
+              <li>Vague tool descriptions — Claude will prefer built-in tools (Grep, Read) over MCP tools with weak descriptions</li>
+              <li>Using stdio transport for a cloud/remote MCP server</li>
+              <li>One giant "do everything" tool instead of scoped, single-purpose tools</li>
+            </ul>
+            <div style="margin-top:14px">
+              <div class="exam-signal">
+                <span class="es-icon">⚑</span>
+                <span><strong>Exam signal:</strong> Questions often show a tool schema and ask "what's wrong?" — malformed JSON Schema required fields and tool descriptions that don't explain output are the most common flaws.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px">
+          <h4>Actions for this course</h4>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/introduction-to-model-context-protocol" target="_blank"><span class="al-dot"></span> Start course → skilljar</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/build-with-claude/mcp" target="_blank"><span class="al-dot"></span> MCP docs</a>
+            <a class="action-link ext" href="https://modelcontextprotocol.io/docs" target="_blank"><span class="al-dot"></span> MCP specification</a>
+            <a class="action-link ext" href="https://github.com/modelcontextprotocol/servers" target="_blank"><span class="al-dot"></span> Community MCP servers (GitHub)</a>
+          </div>
+          <div style="margin-top:12px; font-size:12.5px; color:var(--muted2);">
+            <strong style="color:var(--text)">Hands-on task:</strong> Build a minimal MCP server that exposes one tool, one resource, and one prompt. Deliberately write a bad tool description first, observe Claude misrouting, then fix it. This teaches you more about Domain 4 than any video.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd d4"></span> MCP: Advanced Topics <span class="tag tag-exam">exam: Domain 4</span></div>
+          <div class="cc-tagline">Sampling, notifications, file system access, transport mechanisms, and production security patterns.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~1.5 hrs</span>
+          <span class="tag tag-exam">exam weight</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Topics to focus on</h4>
+            <ul class="topic-list">
+              <li><strong>Authentication in production MCP</strong> — environment variable expansion for tokens, not hardcoded credentials</li>
+              <li><strong>Multi-server access patterns</strong> — how Claude Code resolves tool name collisions across servers</li>
+              <li><strong>tool_choice: "any"</strong> — forces Claude to call a tool rather than respond conversationally; when to use it</li>
+              <li><strong>tool_choice forced selection</strong> — forcing specific tool first (e.g., extract_metadata before enrichment tools)</li>
+              <li><strong>Error response design</strong> — transient, business, and permission errors need structured, distinct error types</li>
+              <li>Choosing community servers over custom for standard integrations (Jira, Slack, etc.)</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Exam anti-patterns</h4>
+            <ul class="warn-list">
+              <li>Building custom MCP servers for standard services that already have community servers</li>
+              <li>Giving all subagents access to all tools — should be scoped to role (e.g., fetch_url → load_document)</li>
+              <li>Returning unstructured error strings instead of typed error objects</li>
+              <li>No authentication on production MCP servers</li>
+            </ul>
+            <div style="margin-top:14px">
+              <div class="exam-signal">
+                <span class="es-icon">⚑</span>
+                <span><strong>Exam signal:</strong> "Agent is calling the wrong tool" → tool description problem. "Agent responds conversationally instead of calling tool" → missing tool_choice: "any".</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px">
+          <h4>Actions for this course</h4>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/model-context-protocol-advanced-topics" target="_blank"><span class="al-dot"></span> Start course → skilljar</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use/overview" target="_blank"><span class="al-dot"></span> Tool use docs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 4 ═══ -->
+  <div class="phase-section" id="p4">
+    <div class="phase-head">
+      <span class="phase-badge">Phase 04</span>
+      <span class="phase-title">Agentic Systems — Highest Exam Weight</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">~2 hrs · Domain 1 (27%)</span>
+    </div>
+    <p class="phase-desc">The most exam-critical phase. <strong>27% of questions come from Domain 1</strong> — agentic architecture and orchestration. Two Academy courses cover it, but the real exam prep here is <strong>sketching architectures for the 6 exam scenarios</strong> and drilling practice questions. This is where judgment matters most — two answer choices often both "work" technically, but one is architecturally superior.</p>
+
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd d1"></span> Introduction to Subagents <span class="tag tag-core">core · 27%</span></div>
+          <div class="cc-tagline">Multi-agent orchestration, context delegation, hub-and-spoke patterns, task decomposition, and lifecycle management.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~1 hr</span>
+          <span class="tag tag-core">critical</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Topics to focus on</h4>
+            <ul class="topic-list">
+              <li><strong>Hub-and-spoke (coordinator → subagent) pattern</strong> — when to use vs. flat pipeline; coordinator handles decomposition and routing</li>
+              <li><strong>Parallel vs. sequential subagent execution</strong> — parallel for independent tasks; sequential when output of one feeds next</li>
+              <li><strong>Subagents do NOT inherit context</strong> — must pass context explicitly; this is one of the biggest exam traps</li>
+              <li><strong>Minimal footprint design</strong> — each agent gets only the tools it needs for its role; no over-provisioning</li>
+              <li><strong>Agentic loop lifecycle</strong> — observe → think → act → respond cycle; stop_reason patterns</li>
+              <li><strong>Clarifying ambiguity before long autonomous runs</strong> — front-load clarification questions, don't start a 20-step task on an ambiguous goal</li>
+              <li><strong>Recovery strategies</strong> — what to do when a subagent fails mid-task (escalate, retry with context, surface partial results)</li>
+              <li>Human-in-the-loop interrupt design — when to pause for approval vs. proceed autonomously</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Exam anti-patterns</h4>
+            <ul class="warn-list">
+              <li>"Super agent" pattern — one agent trying to do everything instead of hub-and-spoke</li>
+              <li>Subagent assumes it has parent context — must be explicitly passed</li>
+              <li>Automatically retrying with elevated permissions after a permission error — violates minimal footprint</li>
+              <li>No escalation path — agents that never ask for human input in production</li>
+              <li>Silently returning incomplete results after subagent failure</li>
+            </ul>
+            <div style="margin-top:14px">
+              <div class="exam-signal">
+                <span class="es-icon">⚑</span>
+                <span><strong>Exam signal:</strong> "Agent X is doing Y in production and misbehaving — what is the most likely architectural cause?" → Check context isolation first, then tool scoping, then missing escalation paths.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px">
+          <h4>Actions for this course</h4>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/introduction-to-subagents" target="_blank"><span class="al-dot"></span> Start course → skilljar</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/build-with-claude/agents" target="_blank"><span class="al-dot"></span> Agents docs</a>
+            <a class="action-link ext" href="https://www.aiforanything.io/blog/claude-certified-architect-ultimate-guide-2026" target="_blank"><span class="al-dot"></span> Multi-agent deep dive guide</a>
+          </div>
+          <div style="margin-top:12px; font-size:12.5px; color:var(--muted2);">
+            <strong style="color:var(--text)">Hands-on task:</strong> Build a minimal agentic loop — orchestrator spawning 2 subagents with explicit context passing and a failure escalation path. Don't wait until it works perfectly; the failure modes teach Domain 1 patterns.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd d1"></span><span class="dd d2"></span> Introduction to Agent Skills <span class="tag tag-exam">exam: Domains 1 & 2</span></div>
+          <div class="cc-tagline">SKILL.md structure, trigger descriptions, tool restrictions, background scripts, team sharing, and enterprise deployment.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~30 min</span>
+          <span class="tag tag-exam">exam weight</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Topics to focus on</h4>
+            <ul class="topic-list">
+              <li><strong>SKILL.md frontmatter</strong> — name, description, allowed-tools, triggers; exam tests correct frontmatter structure</li>
+              <li><strong>How Skills differ from CLAUDE.md</strong> — Skills are modular, task-specific; CLAUDE.md is global project behavior</li>
+              <li><strong>Skills vs. subagents</strong> — Skills are reusable instruction sets; subagents are isolated execution contexts</li>
+              <li><strong>allowed-tools restriction</strong> — limiting tool access per skill to enforce minimal footprint</li>
+              <li>Team sharing via repo commit vs. enterprise managed settings</li>
+              <li>Trigger descriptions — how Claude decides which skill to apply automatically</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Exam anti-patterns</h4>
+            <ul class="warn-list">
+              <li>Putting global project behavior in SKILL.md instead of CLAUDE.md</li>
+              <li>Vague trigger descriptions — Claude won't know when to auto-apply the skill</li>
+              <li>No allowed-tools restriction — skill can call any tool, violating minimal footprint</li>
+            </ul>
+            <div style="margin-top:14px">
+              <div class="exam-signal">
+                <span class="es-icon">⚑</span>
+                <span><strong>Exam signal:</strong> "Claude applies the skill at the wrong time" → trigger description too broad. "Skill can access tools it shouldn't" → missing allowed-tools in frontmatter.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px">
+          <h4>Actions for this course</h4>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/introduction-to-agent-skills" target="_blank"><span class="al-dot"></span> Start course → skilljar</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/claude-code/skills" target="_blank"><span class="al-dot"></span> Skills docs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd d1"></span> Agent SDK & Hooks — Self-Study <span class="tag tag-core">core · Domain 1</span></div>
+          <div class="cc-tagline">No Academy course covers this directly — but stop_reason logic, the Task tool, lifecycle hooks, forkSession, and programmatic enforcement are heavily tested. This is docs + hands-on work.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~2 hrs</span>
+          <span class="tag tag-core">critical gap</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Agent SDK — must-know topics</h4>
+            <ul class="topic-list">
+              <li><strong>stop_reason: "tool_use" vs "end_turn"</strong> — the agentic loop pivot; exam tests correct loop control flow. Never parse natural language to determine termination — always check stop_reason</li>
+              <li><strong>Task tool</strong> — how the coordinator spawns subagents; must be in allowedTools; subagents cannot include Task in their own tools (no recursive spawning)</li>
+              <li><strong>forkSession / --fork-session</strong> — copies conversation history into a new session ID; the original is unchanged; used for parallel exploration from the same checkpoint</li>
+              <li><strong>session resumption</strong> — --continue or --resume appends to same session; requires capturing session_id and passing it explicitly</li>
+              <li><strong>max_budget_usd</strong> — cost guard on query(); set from the start in automated pipelines, not after the bill arrives</li>
+              <li>Each subagent gets its own context window — context isolation is not automatic, it must be designed</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Hooks — must-know topics</h4>
+            <ul class="topic-list">
+              <li><strong>PreToolUse hook</strong> — intercepts before a tool is called; use for compliance enforcement, permission checks, financial guardrails. This is "programmatic enforcement" — deterministic, not probabilistic</li>
+              <li><strong>PostToolUse hook</strong> — runs after tool result returns; use for data normalisation, audit logging, compliance checks on output</li>
+              <li><strong>SessionStart hook</strong> — fires on startup/resume/clear/compact; use for context injection and setup</li>
+              <li><strong>Stop hook</strong> — fires before Claude ends a session; use to verify task completion before closing</li>
+              <li><strong>Programmatic vs. prompt-based enforcement</strong> — the single most important mental model on the exam: hooks/gates are deterministic; prompt instructions are probabilistic. For business-critical rules (refund limits, security checks), always use hooks, never rely on prompt instructions alone</li>
+            </ul>
+          </div>
+        </div>
+        <div class="body-grid" style="margin-top:16px">
+          <div class="body-section">
+            <h4>Exam anti-patterns</h4>
+            <ul class="warn-list">
+              <li>Parsing Claude's natural language response to detect loop termination — check stop_reason instead</li>
+              <li>Using prompt instructions to enforce a $500 refund limit — use PreToolUse hook (deterministic)</li>
+              <li>Giving an agent 18 tools — 4–5 max for reliable tool selection</li>
+              <li>Sentiment-based escalation logic — sentiment ≠ complexity; use explicit criteria</li>
+              <li>Including Task in a subagent's allowedTools — subagents cannot spawn further subagents</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>The key mental model</h4>
+            <div class="exam-signal" style="margin-top:0">
+              <span class="es-icon">⚑</span>
+              <span><strong>Programmatic over prompts:</strong> Any time an exam answer offers "add prompt instructions" vs. "use a PreToolUse hook" for a business-critical rule — the hook is always correct. Prompts are probabilistic; hooks are guaranteed. This is the most common smart distractor on Domain 1.</span>
+            </div>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px; margin-top:16px">
+          <h4>Actions — docs-first, then build</h4>
+          <div class="link-cluster">
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank"><span class="al-dot"></span> Hooks docs (all hook types)</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/claude-code/sdk" target="_blank"><span class="al-dot"></span> Agent SDK docs</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/claude-code/how-claude-code-works" target="_blank"><span class="al-dot"></span> How Claude Code works (stop_reason)</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/claude-code/manage-sessions" target="_blank"><span class="al-dot"></span> Session management (fork/resume)</a>
+          </div>
+          <div style="margin-top:12px; font-size:12.5px; color:var(--muted2);">
+            <strong style="color:var(--text)">Hands-on task:</strong> Add a PreToolUse hook to any project that logs every Bash call before execution. Then make it block a specific command pattern. You'll understand programmatic enforcement in 20 minutes of doing this vs. an hour of reading about it.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="phase-section" id="p5">
+    <div class="phase-head">
+      <span class="phase-badge">Phase 05</span>
+      <span class="phase-title">Claude Code Configuration & Workflows</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">~1.5 hrs · Domain 2 (20%)</span>
+    </div>
+    <p class="phase-desc">You've built CLAUDE.md configs and wired Claude Code into real projects. This phase is about <strong>knowing the exam-specific configuration rules</strong> — settings inheritance, CI/CD flags, and permission scoping — not the mechanics you already know. The exam tests configuration decision rules, not how to use Claude Code day-to-day.</p>
+
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd d2"></span> Claude Code in Action <span class="tag tag-core">core · Domain 2</span></div>
+          <div class="cc-tagline">CLAUDE.md hierarchy, plan mode, slash commands, Explore-Plan-Code-Commit workflow, Git/CI integration, tool permission allowlists.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~1 hr</span>
+          <span class="tag tag-core">core</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Configuration topics to nail</h4>
+            <ul class="topic-list">
+              <li><strong>Settings file hierarchy</strong> — global (~/.claude/settings.json) vs. project (.claude/settings.json) vs. local (.claude/settings.local.json); local is never committed</li>
+              <li><strong>allowedTools in settings.json (committed)</strong> — the right place for team-wide Bash command allowlists; NOT settings.local.json, NOT CLAUDE.md</li>
+              <li><strong>CLAUDE.md inheritance</strong> — project root → subdirectory; more specific files override less specific; understanding the composition model</li>
+              <li><strong>.claude/rules/ directory</strong> — the correct way to split a monolithic CLAUDE.md into topic-specific files (testing.md, api-conventions.md, deployment.md) with YAML frontmatter for path-scoping; a direct sample question topic</li>
+              <li><strong>Session commands</strong> — /compact (manual context compaction), /context (show token usage), /clear (fresh context), /resume (reopen session), /memory (view auto-memory). Know when to use each; exam tests when /compact is right vs. /clear</li>
+              <li><strong>-p flag + --output-format json</strong> — how to run Claude Code non-interactively in CI/CD pipelines; the correct pattern for CI integration</li>
+              <li><strong>CI/CD non-interactive flags</strong> — running Claude Code in pipelines requires --no-confirm or equivalent; interactive mode in CI is a bug, not a feature</li>
+              <li><strong>Plan mode</strong> — when to use (ambiguous specs, large refactors) vs. when it's overhead (clear, scoped tasks)</li>
+              <li>Custom slash commands — structure, scoping, when to define project-level vs. global</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Exam anti-patterns</h4>
+            <ul class="warn-list">
+              <li>Tool permission allowlists in settings.local.json — won't apply to other developers</li>
+              <li>Team-wide permissions in global ~/.claude/settings.json — won't persist across machines</li>
+              <li>Using CLAUDE.md for tool permission enforcement — it's behavioral guidance, not enforced policy</li>
+              <li>Running Claude Code interactively in CI/CD — blocks pipelines, incorrect pattern</li>
+              <li>"Always use plan mode" — exam expects judgment, not blanket rules</li>
+              <li>Monolithic 500-line CLAUDE.md — correct answer is .claude/rules/ with path-scoped topic files</li>
+              <li>Using /compact when a clean start is needed — /clear is correct; /compact keeps (and can lose) old context</li>
+            </ul>
+            <div style="margin-top:14px">
+              <div class="exam-signal">
+                <span class="es-icon">⚑</span>
+                <span><strong>Exam signal:</strong> "CLAUDE.md grown to 500 lines, Claude misses sections" → split into .claude/rules/ files with path-scoped frontmatter. This is a published sample question.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px">
+          <h4>Actions for this course</h4>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/claude-code-in-action" target="_blank"><span class="al-dot"></span> Start course → skilljar</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/claude-code/settings" target="_blank"><span class="al-dot"></span> Claude Code settings docs</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank"><span class="al-dot"></span> CLAUDE.md memory docs</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/claude-code/ci-cd" target="_blank"><span class="al-dot"></span> CI/CD integration docs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd d2"></span> How to Build Skills in Claude Code <span class="tag tag-exam">Domain 2 overlap</span></div>
+          <div class="cc-tagline">Creating, sharing, and troubleshooting Skills — covers the config layer where Skills, CLAUDE.md, hooks, and subagents intersect.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~30 min</span>
+          <span class="tag tag-supp">context</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-grid">
+          <div class="body-section">
+            <h4>Topics to focus on</h4>
+            <ul class="topic-list">
+              <li><strong>Skills vs. CLAUDE.md vs. hooks vs. subagents</strong> — these four are often confused in exam answer choices; know the distinction</li>
+              <li><strong>~/.claude/skills/ directory structure</strong> — where skills live globally vs. project-level</li>
+              <li>How Claude auto-discovers and selects skills based on trigger descriptions</li>
+              <li>Skills 2.0 frontmatter: name, description, allowed-tools, background scripts</li>
+            </ul>
+          </div>
+          <div class="body-section">
+            <h4>Exam anti-patterns</h4>
+            <ul class="warn-list">
+              <li>Confusing hooks (event-triggered scripts) with skills (instruction files)</li>
+              <li>Skills committed to repo overriding user-level skills unexpectedly</li>
+            </ul>
+          </div>
+        </div>
+        <div class="body-section" style="margin-bottom:14px">
+          <h4>Actions for this course</h4>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/introduction-to-agent-skills" target="_blank"><span class="al-dot"></span> Course → skilljar</a>
+            <a class="action-link docs" href="https://docs.anthropic.com/en/docs/claude-code/hooks" target="_blank"><span class="al-dot"></span> Hooks docs</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 6 ═══ -->
+  <div class="phase-section" id="p6">
+    <div class="phase-head">
+      <span class="phase-badge">Phase 06</span>
+      <span class="phase-title">Optional Cloud & Context Courses</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">~2 hrs · Not directly tested</span>
+    </div>
+    <p class="phase-desc">These courses aren't on the CCA-F exam directly. Take them <strong>only if your production environment is AWS or GCP</strong>, or if you want to understand enterprise deployment patterns referenced in exam scenarios.</p>
+
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd" style="background:var(--muted2)"></span> Claude with Amazon Bedrock</div>
+          <div class="cc-tagline">AWS-specific Claude deployment, Bedrock API patterns, streaming, tool use via Bedrock.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~1 hr</span>
+          <span class="tag tag-skip">optional</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-section" style="margin-bottom:14px">
+          <p style="font-size:12.5px; color:var(--muted2); margin-bottom:14px">Skip unless you're deploying to AWS. The exam tests Claude-native APIs, not Bedrock-specific wrappers.</p>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/claude-with-amazon-bedrock" target="_blank"><span class="al-dot"></span> Course → skilljar</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="course-card" onclick="this.classList.toggle('open')">
+      <div class="course-top">
+        <div class="cc-check"></div>
+        <div>
+          <div class="cc-name"><span class="dd" style="background:var(--muted2)"></span> Claude with Google Cloud Vertex AI</div>
+          <div class="cc-tagline">GCP Vertex AI deployment, streaming, and tool use patterns.</div>
+        </div>
+        <div class="cc-right">
+          <span class="cc-time">~1 hr</span>
+          <span class="tag tag-skip">optional</span>
+        </div>
+      </div>
+      <div class="course-body">
+        <div class="body-section" style="margin-bottom:14px">
+          <p style="font-size:12.5px; color:var(--muted2); margin-bottom:14px">Skip unless you're in a GCP environment.</p>
+          <div class="link-cluster">
+            <a class="action-link" href="https://anthropic.skilljar.com/claude-with-vertex-ai" target="_blank"><span class="al-dot"></span> Course → skilljar</a>
+            <a class="action-link gh" href="https://github.com/anthropics/courses/tree/vertex/real_world_prompting" target="_blank"><span class="al-dot"></span> Vertex Real World Prompting (GitHub)</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ PHASE 7 ═══ -->
+  <div class="phase-section" id="p7">
+    <div class="phase-head">
+      <span class="phase-badge">Phase 07</span>
+      <span class="phase-title">Exam Preparation & Practice</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">~1–2 weeks</span>
+    </div>
+    <p class="phase-desc">The exam uses <strong>scenario-based questions exclusively</strong> — no pure definition questions. Practice is non-negotiable. Use the domain score breakdown from practice sets to identify weak areas before booking.</p>
+
+    <!-- Exam Scenarios -->
+    <div style="margin-bottom:20px">
+      <div style="font-family:'DM Mono',monospace; font-size:10.5px; text-transform:uppercase; letter-spacing:.1em; color:var(--muted); margin-bottom:14px;">The 6 exam scenarios (4 randomly selected per exam)</div>
+      <div class="scenario-grid">
+        <div class="scard">
+          <div class="scard-num">Scenario 01</div>
+          <div class="scard-name">Customer Support Agent</div>
+          <div class="scard-desc">Multi-turn agent handling user requests, escalation to humans, policy edge cases, and conversation state management.</div>
+          <div class="scard-domains"><span class="scard-d">Domain 1</span><span class="scard-d">Domain 3</span><span class="scard-d">Domain 5</span></div>
+        </div>
+        <div class="scard">
+          <div class="scard-num">Scenario 02</div>
+          <div class="scard-name">Code Generation with Claude Code</div>
+          <div class="scard-desc">CLAUDE.md configuration, plan mode decisions, slash command design, and integrating Claude Code into a real dev workflow.</div>
+          <div class="scard-domains"><span class="scard-d">Domain 2</span><span class="scard-d">Domain 4</span></div>
+        </div>
+        <div class="scard">
+          <div class="scard-num">Scenario 03</div>
+          <div class="scard-name">Multi-Agent Research Pipeline</div>
+          <div class="scard-desc">Coordinator orchestrating parallel subagents, context isolation, result synthesis, and recovery from subagent failures.</div>
+          <div class="scard-domains"><span class="scard-d">Domain 1</span><span class="scard-d">Domain 5</span></div>
+        </div>
+        <div class="scard">
+          <div class="scard-num">Scenario 04</div>
+          <div class="scard-name">Developer Productivity Tool</div>
+          <div class="scard-desc">Tool-enabled agent automating developer tasks with MCP server integration, tool scoping, and permission management.</div>
+          <div class="scard-domains"><span class="scard-d">Domain 1</span><span class="scard-d">Domain 4</span></div>
+        </div>
+        <div class="scard">
+          <div class="scard-num">Scenario 05</div>
+          <div class="scard-name">CI/CD Pipeline Integration</div>
+          <div class="scard-desc">Non-interactive Claude Code in automated pipelines, permission flags, structured output for CI validation, and error handling.</div>
+          <div class="scard-domains"><span class="scard-d">Domain 2</span><span class="scard-d">Domain 3</span></div>
+        </div>
+        <div class="scard">
+          <div class="scard-num">Scenario 06</div>
+          <div class="scard-name">Structured Data Extraction</div>
+          <div class="scard-desc">Document analysis, JSON schema enforcement, validation retry loops, and consistent output formatting for downstream systems.</div>
+          <div class="scard-domains"><span class="scard-d">Domain 3</span><span class="scard-d">Domain 5</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Practice resources -->
+    <div class="practice-grid">
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">🆓</span><span class="pcard-title">Free Practice Resources</span></div>
+        <ul>
+          <li><strong><a href="https://www.claudecertifiedarchitects.com/cca-practice-questions" target="_blank" style="color:var(--accent2)">claudecertifiedarchitects.com</a></strong> — 300+ free practice questions with full explanations, domain-weighted score breakdown, exam simulator</li>
+          <li><strong><a href="https://certstud.com/certifications/anthropic/claude-architect" target="_blank" style="color:var(--accent2)">certstud.com/claude-architect</a></strong> — 300+ free questions, personalized study schedules, domain analytics, no paywall</li>
+          <li><strong><a href="https://www.aiforanything.io/blog/claude-certified-architect-ultimate-guide-2026" target="_blank" style="color:var(--accent2)">aiforanything.io</a></strong> — free deep-dive guides per domain, anti-pattern cheat sheets, scenario walkthroughs</li>
+          <li><strong><a href="https://agilefever.com/claude-cca-f-foundations-exam-syllabus-explained/" target="_blank" style="color:var(--accent2)">agilefever.com</a></strong> — detailed syllabus breakdown with exam trap explanations per domain</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">💰</span><span class="pcard-title">Paid Practice (worth it)</span></div>
+        <ul>
+          <li><strong><a href="https://tutorialsdojo.com/cca-f-claude-certified-architect-foundations-study-guide/" target="_blank" style="color:var(--accent3)">Tutorials Dojo</a></strong> — timed practice exams with detailed rationale per answer; best for scenario variety and anti-pattern drilling</li>
+          <li><strong><a href="https://www.udemy.com/course/new-claude-certified-architect-foundations-cca-f-exams/" target="_blank" style="color:var(--accent3)">Udemy — CCA-F Practice Exams</a></strong> — exam-realistic 60-question timed sets aligned to official blueprint; scenario-based</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">📐</span><span class="pcard-title">Supplemental Docs to Read</span></div>
+        <ul>
+          <li><strong><a href="https://docs.anthropic.com/en/docs/build-with-claude/agentic-systems" target="_blank" style="color:var(--accent)">Anthropic agentic systems docs</a></strong> — primary source for Domain 1 architecture patterns</li>
+          <li><strong><a href="https://docs.anthropic.com/en/docs/build-with-claude/prompt-engineering/overview" target="_blank" style="color:var(--accent)">Prompt engineering overview</a></strong> — primary source for Domain 3; PRECISE is named here</li>
+          <li><strong><a href="https://modelcontextprotocol.io/docs" target="_blank" style="color:var(--accent)">MCP specification</a></strong> — read the transport and primitives sections for Domain 4</li>
+          <li><strong><a href="https://www.anthropic.com/engineering" target="_blank" style="color:var(--accent)">Anthropic engineering blog</a></strong> — posts on agentic systems and MCP are closest to a primary source for exam reasoning</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">📅</span><span class="pcard-title">Recommended Timeline (You)</span></div>
+        <ul>
+          <li><strong>Week 1–2:</strong> Phases 1–3 (Foundation + API + MCP). Run GitHub notebooks in parallel.</li>
+          <li><strong>Week 3:</strong> Phases 4–5 (Agentic + Claude Code). Sketch architectures for all 6 scenarios.</li>
+          <li><strong>Week 4:</strong> 40–50 practice questions/day, domain-heaviest first. One full 60-question timed sim.</li>
+          <li><strong>Day before exam:</strong> Targeted review of 2 weakest domains only. Rest the evening.</li>
+          <li><strong>Total realistic:</strong> 3–4 weeks given your existing Claude Code + MCP experience.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ CHEATSHEET ═══ -->
+  <div class="phase-section" id="cheatsheet">
+    <div class="phase-head">
+      <span class="phase-badge">Reference</span>
+      <span class="phase-title">Mental Models Cheatsheet</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">Memorize these</span>
+    </div>
+    <p class="phase-desc">The exam repeatedly tests a small set of architectural judgment calls. Internalize these and wrong answers become obviously wrong.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:10px;">
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">🔑</span><span class="pcard-title">The 7 Core Mental Models</span></div>
+        <ul>
+          <li><strong>Programmatic &gt; prompts</strong> for critical rules. Hooks are deterministic; prompts are probabilistic. PreToolUse for guardrails, not system prompt text.</li>
+          <li><strong>No implicit context</strong>. Subagents never inherit coordinator history. Pass everything explicitly.</li>
+          <li><strong>Minimal footprint</strong>. Each agent/subagent gets only the tools it needs for its role. Not "all tools just in case."</li>
+          <li><strong>stop_reason drives loops</strong>. Check stop_reason === "tool_use", never parse response text to detect continuation.</li>
+          <li><strong>Resources ≠ tools</strong>. Read-only catalog data = MCP resource. Actions and writes = MCP tool.</li>
+          <li><strong>Proportional solutions</strong>. If fixing tool descriptions solves it, don't build a routing classifier. The exam penalizes over-engineering.</li>
+          <li><strong>Structured output ≠ semantic correctness</strong>. JSON schema prevents invalid JSON. It does NOT prevent hallucinated values. Know where each helps.</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">⚙️</span><span class="pcard-title">Config Location Quick Reference</span></div>
+        <ul>
+          <li><strong>Team-wide tool allowlists</strong> → .claude/settings.json (committed)</li>
+          <li><strong>Personal/machine overrides</strong> → .claude/settings.local.json (never committed)</li>
+          <li><strong>Global all-projects defaults</strong> → ~/.claude/settings.json</li>
+          <li><strong>Project behavior guidance</strong> → CLAUDE.md (root or subdirectory)</li>
+          <li><strong>Topic-scoped rules (large projects)</strong> → .claude/rules/topic.md with YAML frontmatter globs</li>
+          <li><strong>CI/CD non-interactive</strong> → claude -p "task" --output-format json</li>
+          <li><strong>MCP project-scope</strong> → .mcp.json (committed)</li>
+          <li><strong>MCP user-scope</strong> → ~/.claude.json</li>
+        </ul>
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px;">
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">🪝</span><span class="pcard-title">Hook Decision Tree</span></div>
+        <ul>
+          <li><strong>Before tool call fires</strong> → PreToolUse (block, log, transform input)</li>
+          <li><strong>After tool call returns</strong> → PostToolUse (normalise, audit, check output)</li>
+          <li><strong>Session starts/resumes</strong> → SessionStart (inject context, run setup)</li>
+          <li><strong>Before session ends</strong> → Stop (verify task complete before closing)</li>
+          <li><strong>Context approaching limit</strong> → PreCompact (back up state before compaction)</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">🔄</span><span class="pcard-title">Session Command Quick Reference</span></div>
+        <ul>
+          <li><strong>/compact</strong> — summarise conversation, reduce tokens, keep working in same session</li>
+          <li><strong>/clear</strong> — fresh context window, same session ID, lose conversation history</li>
+          <li><strong>/resume</strong> — reopen a previous session by ID from the picker</li>
+          <li><strong>/context</strong> — show what's consuming token budget (diagnose context bloat)</li>
+          <li><strong>/memory</strong> — view and edit auto-memory that persists across sessions</li>
+          <li><strong>--fork-session</strong> — copy history into new session ID for parallel exploration</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ OUT OF SCOPE ═══ -->
+  <div class="phase-section" id="outofscope">
+    <div class="phase-head">
+      <span class="phase-badge">Scope</span>
+      <span class="phase-title">What's NOT on the Exam</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">Don't study these</span>
+    </div>
+    <p class="phase-desc">Time spent on out-of-scope topics is time not spent on the 27% Domain 1 content. The official exam guide includes an explicit out-of-scope list. These are common wrong answers — distractors that seem relevant but won't appear as correct answers.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:32px;">
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">🚫</span><span class="pcard-title">API / Model</span></div>
+        <ul>
+          <li><strong>Fine-tuning</strong> — not supported, not tested</li>
+          <li><strong>Vision / image analysis</strong> — multimodal inputs are mentioned but not a domain focus</li>
+          <li><strong>Streaming implementation details</strong> — streaming tradeoffs yes, implementation no</li>
+          <li><strong>Embeddings</strong> — not part of the Claude API exam scope</li>
+          <li><strong>Model weights / training</strong> — not tested at any level</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">🚫</span><span class="pcard-title">Security / Auth</span></div>
+        <ul>
+          <li><strong>OAuth flows</strong> — authentication patterns at the app layer are out of scope</li>
+          <li><strong>JWT / token management</strong> — not tested beyond MCP env var patterns</li>
+          <li><strong>Injection attack specifics</strong> — prompt injection awareness yes; SQL/XSS no</li>
+          <li><strong>Compliance frameworks</strong> — SOC2, HIPAA etc. not tested</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">🚫</span><span class="pcard-title">Ecosystem</span></div>
+        <ul>
+          <li><strong>LangChain / LlamaIndex</strong> — third-party orchestration frameworks not tested</li>
+          <li><strong>OpenAI API compatibility</strong> — not relevant</li>
+          <li><strong>Bedrock / Vertex specifics</strong> — deployment wrappers are optional-track only</li>
+          <li><strong>Generic prompt engineering courses</strong> — techniques not specific to Claude are often obsolete or too shallow</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EXAM DAY ═══ -->
+  <div class="phase-section" id="examday">
+    <div class="phase-head">
+      <span class="phase-badge">Logistics</span>
+      <span class="phase-title">Exam Registration & Day-Of</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">Read before booking</span>
+    </div>
+    <p class="phase-desc">The CCA-F has more moving parts than a typical online cert. Read this before you schedule.</p>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:32px;">
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">📋</span><span class="pcard-title">Registration Steps</span></div>
+        <ul>
+          <li><strong>Step 1:</strong> Complete all relevant Academy courses on Skilljar first — certificates signal readiness</li>
+          <li><strong>Step 2:</strong> Join the Claude Partner Network (free) at <a href="https://www.anthropic.com/news/claude-partner-network" target="_blank" style="color:var(--accent2)">anthropic.com/partners</a> — first 5,000 partner employees get the exam free</li>
+          <li><strong>Step 3:</strong> Request exam access at <a href="https://anthropic.skilljar.com/claude-certified-architect-foundations-access-request" target="_blank" style="color:var(--accent2)">anthropic.skilljar.com/…access-request</a></li>
+          <li><strong>Step 4:</strong> After approval, you receive access to the <strong>official 60-question practice exam</strong> inside Skilljar — take this before scheduling the real exam. Aim for >900/1000 before booking.</li>
+          <li><strong>Step 5:</strong> Schedule through ProctorFree (Anthropic's proctoring partner). Fee: $99 per attempt.</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">🖥️</span><span class="pcard-title">Day-Of Logistics</span></div>
+        <ul>
+          <li><strong>Delivery:</strong> ProctorFree — online proctored, camera + microphone + screen share required throughout</li>
+          <li><strong>Format:</strong> 60 scenario-based multiple-choice questions, 120 minutes (2 min/question)</li>
+          <li><strong>Closed-book:</strong> No notes, no docs, no AI assistance of any kind</li>
+          <li><strong>Scenarios:</strong> 4 of 6 production scenarios randomly selected per exam attempt</li>
+          <li><strong>Scoring:</strong> Scaled 100–1000; passing score 720 (roughly 75% correct)</li>
+          <li><strong>Results:</strong> Score report delivered within 2 business days</li>
+          <li><strong>Retake:</strong> $99 per attempt, no mandatory waiting period; use domain breakdown from failed attempt to target weak areas</li>
+          <li><strong>Validity:</strong> Credential valid for 2 years from passing date</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">🧠</span><span class="pcard-title">The 2-Minute-Per-Question Rule</span></div>
+        <ul>
+          <li>Most questions have one obviously wrong answer and one "almost right" distractor. Eliminating the two clearly wrong answers first gets you to a 50/50 much faster.</li>
+          <li>When two answers both "work technically" — the more conservative, minimal-footprint, or programmatic option is almost always correct.</li>
+          <li>If you're uncertain, flag and return. Don't spend 5 minutes on one question.</li>
+          <li>Domain 1 questions (27%) are the most judgment-intensive — give them slightly more time.</li>
+          <li>Domain 5 questions (15%) are often the fastest — once you know CALM and "lost in the middle," they're straightforward.</li>
+        </ul>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">✅</span><span class="pcard-title">Readiness Checklist</span></div>
+        <ul>
+          <li>Completed all 5 exam-relevant Academy courses (check certificates)</li>
+          <li>Run GitHub notebooks: API Fundamentals, Prompt Engineering, Tool Use</li>
+          <li>Built a minimal MCP server with all 3 primitives</li>
+          <li>Built a minimal agentic loop with explicit context passing and escalation</li>
+          <li>Added at least one PreToolUse hook to a real project</li>
+          <li>Scored >85% on two separate domain-weighted practice exams</li>
+          <li>Completed the official Skilljar practice exam (>900/1000)</li>
+          <li>Can explain the difference between hooks, CLAUDE.md, skills, and subagents without hesitation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer links -->
+  <div class="footer-links">
+    <a class="action-link" href="https://anthropic.skilljar.com/" target="_blank"><span class="al-dot"></span> Anthropic Academy</a>
+    <a class="action-link" href="https://anthropic.skilljar.com/claude-certified-architect-foundations-access-request" target="_blank"><span class="al-dot"></span> CCA-F Exam Access</a>
+    <a class="action-link gh" href="https://github.com/anthropics/courses" target="_blank"><span class="al-dot"></span> Anthropic GitHub Courses</a>
+    <a class="action-link docs" href="https://docs.anthropic.com" target="_blank"><span class="al-dot"></span> Anthropic Docs</a>
+    <a class="action-link ext" href="https://www.claudecertifiedarchitects.com/cca-practice-questions" target="_blank"><span class="al-dot"></span> Free Practice Questions</a>
+    <a class="action-link ext" href="https://www.anthropic.com/learn" target="_blank"><span class="al-dot"></span> anthropic.com/learn</a>
+  </div>
+
+</main>
+</div>
+
+<script>
+  // Smooth scroll for nav items
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
