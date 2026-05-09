@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -774,6 +775,9 @@
     </a>
     <a class="nav-item" href="#p7">
       <span class="nav-dot" style="background:var(--accent3)"></span> Exam Prep
+    </a>
+    <a class="nav-item" href="#practiceexam">
+      <span class="nav-dot" style="background:var(--accent)"></span> Practice Exam
     </a>
     <a class="nav-item" href="#cheatsheet">
       <span class="nav-dot" style="background:var(--accent4)"></span> Cheatsheet
@@ -1578,6 +1582,39 @@
     </div>
   </div>
 
+
+  <!-- ═══ PRACTICE EXAM ═══ -->
+  <div class="phase-section" id="practiceexam">
+    <div class="phase-head">
+      <span class="phase-badge">Practice</span>
+      <span class="phase-title">Scenario Practice Exam</span>
+      <div class="phase-rule"></div>
+      <span class="phase-time">20 Qs · target 80%</span>
+    </div>
+    <p class="phase-desc">A focused, scenario-style practice test using the same architectural decision patterns as the rest of this study plan: agent orchestration, Claude Code configuration, prompt engineering, MCP/tool design, and context management.</p>
+
+    <div class="practice-grid">
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">▶</span><span class="pcard-title">Practice Test</span></div>
+        <p>Use this when you want a scored readiness check. Answers and rationales appear after each selection.</p>
+        <div class="link-cluster" style="margin-top:14px;">
+          <button onclick="openPractice('all')" style="background:rgba(200,240,122,.08); border:1.5px solid rgba(200,240,122,.3); color:var(--accent); font-family:'DM Mono',monospace; font-size:11px; letter-spacing:.1em; text-transform:uppercase; padding:9px 16px; border-radius:7px; cursor:pointer;">Start 20-question exam</button>
+        </div>
+      </div>
+      <div class="pcard">
+        <div class="pcard-head"><span class="pcard-icon">◎</span><span class="pcard-title">Domain Drill</span></div>
+        <ul>
+          <li><strong>All domains:</strong> mixed exam simulation</li>
+          <li><strong>Domain 1:</strong> agent architecture and orchestration</li>
+          <li><strong>Domain 2:</strong> Claude Code configuration and workflows</li>
+          <li><strong>Domain 3:</strong> prompt engineering and structured output</li>
+          <li><strong>Domain 4:</strong> MCP and tool design</li>
+          <li><strong>Domain 5:</strong> context management and reliability</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
   <!-- ═══ CHEATSHEET ═══ -->
   <div class="phase-section" id="cheatsheet">
     <div class="phase-head">
@@ -1752,6 +1789,22 @@
 </main>
 </div>
 
+
+<!-- ── PRACTICE MODE OVERLAY ── -->
+<div id="practiceOverlay">
+  <div id="practicePanel">
+    <div class="pm-header">
+      <div>
+        <div class="pm-title"><span>▶</span> Practice Exam</div>
+        <div class="pm-score-badge">Score <b id="pmScore">0</b>/<span id="pmTotal">0</span></div>
+      </div>
+      <button class="pm-close" onclick="closePractice()">×</button>
+    </div>
+    <div class="pm-progress-bar"><div class="pm-progress-fill" id="pmProgress" style="width:0%"></div></div>
+    <div class="pm-body" id="pmBody"></div>
+  </div>
+</div>
+
 <script>
   // Smooth scroll for nav items
   document.querySelectorAll('a[href^="#"]').forEach(a => {
@@ -1763,6 +1816,412 @@
       }
     });
   });
+
+  const practiceBank = [
+    {
+      domain: 'Domain 1 · Agentic Architecture', color: 'd1',
+      scenario: 'A support agent can issue refunds through a backend tool. Company policy caps automatic refunds at $500.',
+      question: 'The team added the refund limit to the system prompt, but the agent still occasionally approves larger refunds. What is the best architectural fix?',
+      options: [
+        'Rewrite the system prompt with stricter wording and uppercase warnings',
+        'Use a PreToolUse hook or deterministic guardrail before the refund tool executes',
+        'Switch all refund tasks to the largest model',
+        'Add a longer user-facing explanation before every refund'
+      ],
+      answer: 1,
+      rationale: 'Critical business rules should be enforced programmatically. Prompt instructions are probabilistic; hooks and tool guards are deterministic.'
+    },
+    {
+      domain: 'Domain 1 · Agentic Architecture', color: 'd1',
+      scenario: 'A coordinator delegates research to a subagent. The subagent returns an answer that ignores the user’s original constraints.',
+      question: 'What is the most likely design flaw?',
+      options: [
+        'The subagent was not explicitly given the required context',
+        'The coordinator used XML tags',
+        'The task used too many examples',
+        'The model temperature was too low'
+      ],
+      answer: 0,
+      rationale: 'Subagents do not inherit the parent conversation automatically. Required context must be passed explicitly.'
+    },
+    {
+      domain: 'Domain 1 · Agentic Architecture', color: 'd1',
+      scenario: 'A multi-agent research workflow needs to summarize four independent sources and then produce one final synthesis.',
+      question: 'Which design is strongest?',
+      options: [
+        'Run all work through one agent with every available tool',
+        'Use parallel source-specific subagents, then have a coordinator synthesize the outputs',
+        'Run each source sequentially even though the tasks are independent',
+        'Give every subagent access to the Task tool so they can spawn more agents'
+      ],
+      answer: 1,
+      rationale: 'Independent subtasks are good candidates for parallel subagents. A coordinator should handle decomposition and synthesis.'
+    },
+    {
+      domain: 'Domain 1 · Agentic Architecture', color: 'd1',
+      scenario: 'A subagent fails midway through a production workflow after collecting partial results.',
+      question: 'What is the best production behavior?',
+      options: [
+        'Return the partial result silently',
+        'Retry forever until the task succeeds',
+        'Surface partial results, explain the failure, and use bounded retry or escalation logic',
+        'Automatically grant broader permissions and retry'
+      ],
+      answer: 2,
+      rationale: 'Good agentic systems avoid silent failure, unbounded retries, and automatic privilege escalation.'
+    },
+    {
+      domain: 'Domain 2 · Claude Code', color: 'd2',
+      scenario: 'A team wants every developer cloning the repo to inherit the same safe Bash allowlist.',
+      question: 'Where should the shared allowlist live?',
+      options: [
+        '~/.claude/settings.json',
+        '.claude/settings.local.json',
+        '.claude/settings.json',
+        'A private note outside the repo'
+      ],
+      answer: 2,
+      rationale: 'Committed team-wide Claude Code settings belong in .claude/settings.json. Local settings are for machine-specific overrides.'
+    },
+    {
+      domain: 'Domain 2 · Claude Code', color: 'd2',
+      scenario: 'A CI pipeline invokes Claude Code, but the run blocks waiting for interactive approval.',
+      question: 'What is the best fix?',
+      options: [
+        'Run Claude Code manually instead of in CI',
+        'Use non-interactive CLI execution with structured output and CI-safe permissions',
+        'Move all CI instructions into a longer CLAUDE.md file',
+        'Use plan mode for every CI run'
+      ],
+      answer: 1,
+      rationale: 'CI/CD workflows should be non-interactive and produce machine-readable output. Interactive approvals can deadlock the pipeline.'
+    },
+    {
+      domain: 'Domain 2 · Claude Code', color: 'd2',
+      scenario: 'A project CLAUDE.md has grown to hundreds of lines, and Claude often misses relevant instructions.',
+      question: 'What is the best maintainability improvement?',
+      options: [
+        'Move every instruction to global user settings',
+        'Split guidance into scoped .claude/rules files',
+        'Delete project instructions and rely on defaults',
+        'Put all tool permissions in CLAUDE.md'
+      ],
+      answer: 1,
+      rationale: 'Large CLAUDE.md files should be decomposed into scoped rules so only relevant guidance is loaded for a task or path.'
+    },
+    {
+      domain: 'Domain 2 · Claude Code', color: 'd2',
+      scenario: 'A developer wants to branch from the same session into two possible implementations while preserving the original path.',
+      question: 'Which Claude Code behavior fits best?',
+      options: [
+        '--fork-session',
+        '/clear',
+        '/memory',
+        'settings.local.json'
+      ],
+      answer: 0,
+      rationale: 'Forking creates a new session from the same history while leaving the original session unchanged.'
+    },
+    {
+      domain: 'Domain 3 · Prompt Engineering', color: 'd3',
+      scenario: 'A production summarizer returns inconsistent tone and length across repeated runs.',
+      question: 'Which missing PRECISE component is the most likely cause?',
+      options: [
+        'Examples',
+        'SSE transport',
+        'A larger context window',
+        'MCP resources'
+      ],
+      answer: 0,
+      rationale: 'Examples anchor style, tone, length, and output shape. They are often the missing piece when output varies too much.'
+    },
+    {
+      domain: 'Domain 3 · Prompt Engineering', color: 'd3',
+      scenario: 'A document extraction workflow sometimes returns malformed JSON that breaks downstream processing.',
+      question: 'What is the best first improvement?',
+      options: [
+        'Ask the model to be more careful',
+        'Use structured output with schema validation and bounded retries',
+        'Remove all examples from the prompt',
+        'Switch from JSON to prose'
+      ],
+      answer: 1,
+      rationale: 'Structured output plus validation and capped retries is the standard reliability pattern for extraction workflows.'
+    },
+    {
+      domain: 'Domain 3 · Prompt Engineering', color: 'd3',
+      scenario: 'A system processes 20,000 independent classifications overnight, and latency is not important.',
+      question: 'Which API feature is most appropriate?',
+      options: [
+        'Streaming',
+        'Message Batches API',
+        'Plan mode',
+        'A single long context request'
+      ],
+      answer: 1,
+      rationale: 'Message Batches are suited to large volumes of independent asynchronous requests, especially where real-time latency is unnecessary.'
+    },
+    {
+      domain: 'Domain 3 · Prompt Engineering', color: 'd3',
+      scenario: 'A model returns JSON that matches the schema, but several extracted values are fabricated.',
+      question: 'What does this show?',
+      options: [
+        'JSON schema guarantees semantic correctness',
+        'Schemas enforce shape but not factual accuracy',
+        'The schema should be removed',
+        'The only fix is to use a larger model'
+      ],
+      answer: 1,
+      rationale: 'Schemas enforce structure. They do not guarantee the extracted content is true.'
+    },
+    {
+      domain: 'Domain 4 · Tool Use / MCP', color: 'd4',
+      scenario: 'An MCP server exposes a read-only product catalog as a callable tool, causing awkward token-heavy exploration.',
+      question: 'Which MCP primitive is more appropriate?',
+      options: [
+        'Resource',
+        'Prompt',
+        'Hook',
+        'Subagent'
+      ],
+      answer: 0,
+      rationale: 'Read-only content should generally be exposed as a resource. Actions and writes should be exposed as tools.'
+    },
+    {
+      domain: 'Domain 4 · Tool Use / MCP', color: 'd4',
+      scenario: 'An agent frequently chooses the wrong MCP tool because several tools have vague names and descriptions.',
+      question: 'What should be improved first?',
+      options: [
+        'Increase max tokens',
+        'Improve tool names, descriptions, and input schemas',
+        'Create one universal do_everything tool',
+        'Disable tool descriptions'
+      ],
+      answer: 1,
+      rationale: 'Claude relies on tool names, descriptions, and schemas to decide when and how to call tools.'
+    },
+    {
+      domain: 'Domain 4 · Tool Use / MCP', color: 'd4',
+      scenario: 'A workflow must call extract_metadata before any enrichment tool runs.',
+      question: 'What is the strongest control?',
+      options: [
+        'Politely ask Claude to use the right order',
+        'Use forced tool selection or orchestration logic for the required first tool',
+        'Give every tool to every subagent',
+        'Remove the metadata step'
+      ],
+      answer: 1,
+      rationale: 'When order matters, use deterministic orchestration or forced tool selection instead of relying only on prompt wording.'
+    },
+    {
+      domain: 'Domain 4 · Tool Use / MCP', color: 'd4',
+      scenario: 'A production MCP server needs to be accessed remotely from cloud infrastructure.',
+      question: 'Which transport choice is more appropriate than local stdio?',
+      options: [
+        'SSE or HTTP-based remote transport',
+        'A local subprocess only',
+        'Manual copy/paste',
+        'A README file'
+      ],
+      answer: 0,
+      rationale: 'stdio is local subprocess communication. Remote MCP servers need a remote-capable transport.'
+    },
+    {
+      domain: 'Domain 5 · Context Management', color: 'd5',
+      scenario: 'A long-running Claude Code session is approaching the context limit, but the user wants to continue the same task.',
+      question: 'Which command is most appropriate?',
+      options: [
+        '/clear',
+        '/compact',
+        '/memory',
+        '/resume'
+      ],
+      answer: 1,
+      rationale: '/compact summarizes the current context and keeps work moving. /clear starts fresh and discards the working context.'
+    },
+    {
+      domain: 'Domain 5 · Context Management', color: 'd5',
+      scenario: 'A long document analysis workflow consistently misses details in the middle of the input.',
+      question: 'What is the best mitigation?',
+      options: [
+        'Remove section headings',
+        'Put key summaries and structure near the beginning, trim noise, and use clear section markers',
+        'Always use the smallest model',
+        'Disable context management'
+      ],
+      answer: 1,
+      rationale: 'Lost-in-the-middle failures are mitigated with structure, summaries, headings, and trimming irrelevant content.'
+    },
+    {
+      domain: 'Domain 5 · Context Management', color: 'd5',
+      scenario: 'A support agent is uncertain whether a user request is allowed by policy, and the action would be irreversible.',
+      question: 'What should the system do?',
+      options: [
+        'Proceed because the user asked clearly',
+        'Escalate to a human or require approval',
+        'Hide the uncertainty',
+        'Retry with a higher temperature'
+      ],
+      answer: 1,
+      rationale: 'Low-confidence, policy-ambiguous, or irreversible actions should trigger human review or approval.'
+    },
+    {
+      domain: 'Domain 5 · Context Management', color: 'd5',
+      scenario: 'A subagent is passed the entire parent conversation, including unrelated tool outputs and old decisions.',
+      question: 'What is the main risk?',
+      options: [
+        'The subagent will always become more accurate',
+        'Context bloat, distraction, and higher chance of using stale or irrelevant information',
+        'The subagent will be unable to use tools',
+        'The coordinator will stop receiving messages'
+      ],
+      answer: 1,
+      rationale: 'Minimal, task-relevant context is safer and more reliable than blindly passing everything.'
+    }
+  ];
+
+  let practiceSet = practiceBank;
+  let currentQuestion = 0;
+  let score = 0;
+  let answered = false;
+  let domainScores = {};
+
+  function openPractice(filter = 'all') {
+    practiceSet = filter === 'all' ? practiceBank : practiceBank.filter(q => q.color === filter);
+    currentQuestion = 0;
+    score = 0;
+    answered = false;
+    domainScores = {};
+    document.getElementById('practiceOverlay').classList.add('show');
+    document.body.style.overflow = 'hidden';
+    renderPracticeQuestion();
+  }
+
+  function closePractice() {
+    document.getElementById('practiceOverlay').classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function renderPracticeQuestion() {
+    const q = practiceSet[currentQuestion];
+    const body = document.getElementById('pmBody');
+    const pct = practiceSet.length ? (currentQuestion / practiceSet.length) * 100 : 0;
+    document.getElementById('pmScore').textContent = score;
+    document.getElementById('pmTotal').textContent = practiceSet.length;
+    document.getElementById('pmProgress').style.width = pct + '%';
+    answered = false;
+
+    body.innerHTML = `
+      <div class="pm-filter-row">
+        <button class="pm-filter-btn ${practiceSet.length === practiceBank.length ? 'active' : ''}" onclick="openPractice('all')">All</button>
+        <button class="pm-filter-btn" onclick="openPractice('d1')">D1 Agentic</button>
+        <button class="pm-filter-btn" onclick="openPractice('d2')">D2 Code</button>
+        <button class="pm-filter-btn" onclick="openPractice('d3')">D3 Prompt</button>
+        <button class="pm-filter-btn" onclick="openPractice('d4')">D4 MCP</button>
+        <button class="pm-filter-btn" onclick="openPractice('d5')">D5 Context</button>
+      </div>
+      <div class="pm-domain-tag tag-${q.color === 'd1' ? 'core' : q.color === 'd2' ? 'supp' : q.color === 'd3' ? 'exam' : q.color === 'd4' ? 'skip' : 'exam'}">${q.domain}</div>
+      <div class="pm-q-num">Question ${currentQuestion + 1} of ${practiceSet.length}</div>
+      <div class="pm-scenario">${q.scenario}</div>
+      <div class="pm-question">${q.question}</div>
+      <div class="pm-options">
+        ${q.options.map((option, i) => `
+          <button class="pm-option" onclick="selectPracticeAnswer(${i})">
+            <span class="pm-opt-letter">${String.fromCharCode(65 + i)}</span>
+            <span class="pm-opt-text">${option}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="pm-rationale" id="pmRationale"></div>
+      <div class="pm-footer">
+        <button class="pm-btn pm-btn-ghost" onclick="closePractice()">Exit</button>
+        <button class="pm-btn pm-btn-primary" id="pmNext" onclick="nextPracticeQuestion()" disabled>Next</button>
+      </div>
+    `;
+  }
+
+  function selectPracticeAnswer(selected) {
+    if (answered) return;
+    answered = true;
+
+    const q = practiceSet[currentQuestion];
+    const options = document.querySelectorAll('.pm-option');
+    const isCorrect = selected === q.answer;
+    const domainKey = q.domain.split(' · ')[0];
+
+    if (!domainScores[domainKey]) domainScores[domainKey] = { correct: 0, total: 0, color: q.color };
+    domainScores[domainKey].total++;
+
+    if (isCorrect) {
+      score++;
+      domainScores[domainKey].correct++;
+      options[selected].classList.add('selected-correct');
+    } else {
+      options[selected].classList.add('selected-wrong');
+      options[q.answer].classList.add('reveal-correct');
+    }
+
+    options.forEach(option => option.disabled = true);
+    document.getElementById('pmScore').textContent = score;
+
+    const rationale = document.getElementById('pmRationale');
+    rationale.classList.add('show');
+    rationale.innerHTML = `
+      <div class="pm-rat-head ${isCorrect ? 'pm-rat-correct' : 'pm-rat-wrong'}">${isCorrect ? 'Correct' : 'Incorrect'}</div>
+      <div class="pm-rat-body"><strong>Answer:</strong> ${q.options[q.answer]}<br>${q.rationale}</div>
+    `;
+
+    const next = document.getElementById('pmNext');
+    next.disabled = false;
+    next.textContent = currentQuestion === practiceSet.length - 1 ? 'Results' : 'Next';
+  }
+
+  function nextPracticeQuestion() {
+    if (currentQuestion < practiceSet.length - 1) {
+      currentQuestion++;
+      renderPracticeQuestion();
+    } else {
+      renderPracticeResults();
+    }
+  }
+
+  function renderPracticeResults() {
+    document.getElementById('pmProgress').style.width = '100%';
+    const body = document.getElementById('pmBody');
+    const percent = Math.round((score / practiceSet.length) * 100);
+    const label = percent >= 85 ? 'Exam-ready range' : percent >= 75 ? 'Close — review weak domains' : 'Review needed before scheduling';
+
+    const allDomains = ['Domain 1', 'Domain 2', 'Domain 3', 'Domain 4', 'Domain 5'];
+    const rows = allDomains.map(domain => {
+      const row = domainScores[domain] || { correct: 0, total: 0, color: 'd1' };
+      const rowPct = row.total ? Math.round((row.correct / row.total) * 100) : 0;
+      return `
+        <div class="pm-rb-row">
+          <span class="pm-rb-dot ${row.color}"></span>
+          <span class="pm-rb-label">${domain}</span>
+          <span class="pm-rb-score">${row.correct}/${row.total}</span>
+          <span class="pm-rb-bar"><span class="pm-rb-fill ${row.color}" style="width:${rowPct}%; background:var(--accent);"></span></span>
+        </div>
+      `;
+    }).join('');
+
+    body.innerHTML = `
+      <div class="pm-results">
+        <div class="pm-result-score">${percent}%</div>
+        <div class="pm-result-label">${label}</div>
+        <div class="pm-result-breakdown">${rows}</div>
+        <div class="pm-footer">
+          <button class="pm-btn pm-btn-ghost" onclick="closePractice()">Close</button>
+          <button class="pm-btn pm-btn-primary" onclick="openPractice('all')">Retake All</button>
+        </div>
+      </div>
+    `;
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closePractice();
+  });
+
 </script>
 
 </body>
